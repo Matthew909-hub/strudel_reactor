@@ -121,8 +121,8 @@ useEffect(() => {
 
 
 return (
-    <div>
-        <h2>Electrocardiogram Strudel</h2>
+    <div style={{ backgroundColor: '#000000', height: '100vh' }}>
+        <h2 className="text-white" >Electrocardiogram Strudel</h2>
         <main>
 
             <div className="container-fluid">
