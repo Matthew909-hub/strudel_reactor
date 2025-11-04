@@ -122,7 +122,7 @@ useEffect(() => {
 
 return (
     <div>
-        <h2>My Strudel</h2>
+        <h2>Electrocardiogram Strudel</h2>
         <main>
 
             <div className="container-fluid">
