@@ -11,8 +11,9 @@ import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJButton from './Component/DJButton';
 import PlayResume from './Component/PlayResume';
-import ProcButton from './Component/ProcButton';
-import MusicInput from './Component/MusicInput'
+//import ProcButton from './Component/ProcButton';
+import MusicInput from './Component/MusicInput';
+import {Preprocess} from './utils/Preprocess'
 
 let globalEditor = null;
 
@@ -71,13 +72,29 @@ export default function StrudelDemo() {
 
     //Play and stop music.
     const playStart = () => {
+        //proc text and volume is embedded in play start function.
+        let outputText = Preprocess({ inputText: procText, volume: volume });
+        globalEditor.setCode(outputText);
         globalEditor.evaluate()
     }
     const playStop = () => {
         globalEditor.stop()
     }
 
-    const [songText, setSongText] = useState(stranger_tune)
+    const [procText, setProcText] = useState(stranger_tune)
+    //const [songText, setSongText] = useState(stranger_tune)
+
+    const [volume, setVolume] = useState(1);
+    //check for play state
+    const [state, setState] = useState("stop")
+
+    // process the play and stop
+    useEffect(() => {
+        //check if play or stop
+        if (state === "play") {
+            playStart();
+        }
+    }, [volume])
 
 useEffect(() => {
 
@@ -112,12 +129,12 @@ useEffect(() => {
                 },
             });
             
-        document.getElementById('proc').value = stranger_tune
+        document.getElementById('proc').value = procText
         //SetupButtons()
         //Proc()
     }
-    globalEditor.setCode(songText);
-}, [songText]);
+    globalEditor.setCode(procText);
+}, [procText]);
 
 
 return (
@@ -128,14 +145,14 @@ return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <MusicInput defualtValue={songText} onChange={ (e) => setSongText(e.target.value)} />
+                        <MusicInput defualtValue={procText} onChange={ (e) => setProcText(e.target.value)} />
                     </div>
                     <div className="col-md-4">
 
                         <nav>
-                            <ProcButton/>
+                            {/*<ProcButton/>*/}
                             <br />
-                            <PlayResume onPlay={playStart} onStop={playStop} />
+                            <PlayResume onPlay={() => { setState("play"); playStart() }} onStop={() => { setState("stop"); playStop() }} />
                         </nav>
                     </div>
                 </div>
@@ -145,7 +162,7 @@ return (
                         <div id="output" />
                     </div>
                     <div className="col-md-4">
-                        <DJButton />
+                        <DJButton volumeChange={volume} onVolumeChange={ (e) => setVolume(e.target.value)} />
                     </div>
                 </div>
             </div>
