@@ -56,7 +56,7 @@ note(pick(arpeggiator1, "<0 1 2 3>/2"))
 .adsr("0:0:.5:.1")
 .room(0.6)
 .lpenv(3.3)
-.postgain(pick(gain_patterns, pattern))._scope();
+.postgain(pick(gain_patterns, pattern)).scope();
 
 
 drums:
@@ -96,5 +96,5 @@ stack(
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY
 // all(x => x.gain(mouseX.range(0,1)))
 // all(x => x.log())
-
+all(x => x.gain({$VOLUME}))
 // @version 1.2`;
