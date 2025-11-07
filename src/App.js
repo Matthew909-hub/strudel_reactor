@@ -58,10 +58,10 @@ const handleD3Data = (event) => {
 
 //export function ProcessText(match, ...args) {
 
-//    let replace = ""
-//    if (document.getElementById('flexRadioDefault2').checked) {
-//        replace = "_"
-//    }
+    //let replace = ""
+    //if (document.getElementById('flexRadioDefault2').checked) {
+    //    replace = "_"
+    //}
 
 //    return replace
 //}
@@ -139,13 +139,13 @@ useEffect(() => {
 
 return (
     <div style={{ backgroundColor: '#000000', height: '100vh' }}>
-        <h2 className="text-white" >Electrocardiogram Strudel</h2>
+        <h2 className="text-white text-center" >Electrocardiogram Strudel</h2>
         <main>
 
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <MusicInput defualtValue={procText} onChange={ (e) => setProcText(e.target.value)} />
+                        <MusicInput defualtValue={procText} onChange={(e) => setProcText(e.target.value)} />
                     </div>
                     <div className="col-md-4">
 
